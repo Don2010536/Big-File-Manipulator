@@ -1,0 +1,27 @@
+﻿<Window x:Class="Big_File_Manipulator.Dialogs.SelectDir"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Big_File_Manipulator.Dialogs"
+        mc:Ignorable="d"
+        Title="SelectDir" Height="450" Width="800" Background="{x:Null}" Foreground="White" AllowsTransparency="True" WindowStyle="None">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="49*"/>
+			<RowDefinition Height="401*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid Margin="10,10,10,9" Grid.ColumnSpan="2">
+			<TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Text="Directory: " TextWrapping="Wrap" VerticalAlignment="Center" FontSize="16" Height="21" Width="72"/>
+			<TextBox x:Name="InitDir" Style="{StaticResource TextBox}" Margin="87,0,45,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Center" Height="30" BorderBrush="White" Background="#FF333337" Foreground="White" IsReadOnly="True" IsUndoEnabled="False"/>
+			<Button x:Name="SelectFolderBtn" Style="{StaticResource Button}" Content="…" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Height="30" Width="30" Background="#FF3C75C3" Foreground="White" BorderBrush="{x:Null}"/>
+		</Grid>
+		<Button Content="Button" Margin="10,10,10,0" VerticalAlignment="Top" Width="380" Height="30" Grid.Row="1"/>
+		<Button Content="Button" Margin="10,10,10,0" VerticalAlignment="Top" Width="380" Height="30" Grid.Row="1" Grid.Column="1"/>
+
+	</Grid>
+</Window>

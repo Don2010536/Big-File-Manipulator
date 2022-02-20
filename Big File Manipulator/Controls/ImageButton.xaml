@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Big_File_Manipulator.Controls.ImageButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Big_File_Manipulator.Controls"
+             mc:Ignorable="d">
+    <Grid IsHitTestVisible="True" UseLayoutRounding="True">
+		<Border x:Name="BorderHighlight" BorderThickness="1,1,1,1" CornerRadius="12,12,12,12" BorderBrush="Transparent" MouseEnter="Grid_MouseEnter" MouseLeave="Grid_MouseLeave" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="#00000000">
+			<StackPanel>
+				<Image x:Name="FileImage" Margin="5" Source="/Assets/File.png" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="50" MaxWidth="50"/>
+				<TextBlock x:Name="Label" Text="FileName" Foreground="White" FontSize="14" TextAlignment="Center" Margin="10,0,10,0" UseLayoutRounding="True" MaxWidth="70" MinWidth="70"/>
+			</StackPanel>
+		</Border>
+	</Grid>
+</UserControl>
