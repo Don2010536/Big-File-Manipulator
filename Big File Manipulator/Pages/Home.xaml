@@ -66,23 +66,21 @@
 		</Border>
 
 
-		<Border BorderThickness="1,1,1,1" BorderBrush="White" Margin="10,36,95,48" Background="#FF333337" CornerRadius="12,12,12,12" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
+		<Border BorderThickness="1,1,1,1" BorderBrush="White" Margin="10,45,95,48" Background="#FF333337" CornerRadius="12,12,12,12" Grid.Column="1" Grid.Row="1">
 			<Border.Effect>
 				<DropShadowEffect Color="#FF59A8DE" BlurRadius="10" ShadowDepth="0" Opacity="0.7"/>
 			</Border.Effect>
 			<ScrollViewer Margin="9,9,9,9" VerticalScrollBarVisibility="Auto">
-				<!-- <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"> -->
 				<WrapPanel x:Name="DirWrap" Orientation="Horizontal"/>
-				<!-- </ScrollViewer> -->
 			</ScrollViewer>
 		</Border>
-		<TextBlock Text="Directory Tree" Margin="10,10,100,0" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Grid.Column="1" Grid.ColumnSpan="2" Height="21" Grid.Row="1"/>
+		<TextBlock Text="Directory Tree" Margin="10,14,100,0" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Grid.Column="1" Height="21" Grid.Row="1"/>
 
 		<GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="2" Background="#FF333337" MinHeight="100" Margin="0,0,0,48" Grid.RowSpan="2"/>
 
-		<Button x:Name="MoveBtn" Style="{StaticResource Button}" Content="Move" Grid.Column="2" Margin="0,137,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="75" Background="#FFB7C33C" Grid.Row="1" Click="MoveBtn_Click"/>
-		<Button x:Name="DeleteBtn" Style="{StaticResource Button}" Content="Delete" Grid.Column="2" Margin="0,237,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="75" Background="#FFC33C3C" Grid.Row="1" Click="DeleteBtn_Click"/>
-		<Button x:Name="CopyBtn" Style="{StaticResource Button}" Content="Copy" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,36,10,0" Height="75" Width="75" Background="#FF3CC367" Grid.Row="1" Click="CopyBtn_Click"/>
+		<Button x:Name="MoveBtn" Style="{StaticResource Button}" Content="Move" Grid.Column="1" Margin="0,81,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="40" Background="#FFB7C33C" Grid.Row="1" Click="MoveBtn_Click"/>
+		<Button x:Name="DeleteBtn" Style="{StaticResource Button}" Content="Delete" Grid.Column="1" Margin="0,126,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="40" Background="#FFC33C3C" Grid.Row="1" Click="DeleteBtn_Click"/>
+		<Button x:Name="CopyBtn" Style="{StaticResource Button}" Content="Copy" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,36,10,0" Height="40" Width="75" Background="#FF3CC367" Grid.Row="1" Click="CopyBtn_Click"/>
 		<TextBlock Text="Options" Margin="0,10,10,0" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Grid.Column="2" Height="21" HorizontalAlignment="Right" Width="75" Grid.Row="1"/>
 		<Grid x:Name="StatusGroup" Visibility="Collapsed" Grid.Column="1" Grid.ColumnSpan="2">
 			<TextBlock Text="Operation Status" TextAlignment="Center" FontSize="16" Grid.ColumnSpan="2" Grid.Column="1" Margin="10,10,10,0" Height="21" VerticalAlignment="Top"/>
@@ -105,8 +103,7 @@
 				</ScrollViewer>
 			</Border>
 		</Grid>
-		<TextBlock Text="Controls" Margin="0,330,10,0" VerticalAlignment="Top" TextAlignment="Center" FontSize="16" Grid.Column="1" Height="21" HorizontalAlignment="Right" Width="75" Grid.Row="1"/>
-		<Button x:Name="BackBtn" Style="{StaticResource Button}" Content="Back" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,397,10,0" Height="36" Width="75" Background="#FF3CC367" Grid.Row="1" Click="BackBtn_Click"/>
-		<Button x:Name="HomeBtn" Style="{StaticResource Button}" Content="Home" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,356,10,0" Height="36" Width="75" Background="#FFB7C33C" Grid.Row="1" Click="HomeBtn_Click"/>
+		<Button x:Name="BackBtn" Style="{StaticResource Button}" Content="◄" FontSize="20" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,10,0,0" Height="30" Width="30" Background="#FF3CC367" Grid.Row="1" Click="BackBtn_Click"/>
+		<Button x:Name="HomeBtn" Style="{StaticResource Button}" Content="⌂" FontSize="20" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="30" Width="30" Background="#FFB7C33C" Grid.Row="1" Click="HomeBtn_Click"/>
 	</Grid>
 </Page>

@@ -49,7 +49,9 @@ namespace Big_File_Manipulator.Pages
                 Header = InitDir.Text.Split('\\')[^1],
                 Foreground = Brushes.White
             };
+
             ExtensionStack.Children.Clear();
+
             _ = Task.Run(() => {
                 GetDirInfo(Dispatcher.Invoke(() => { return InitDir.Text; }), true);
 
@@ -80,24 +82,23 @@ namespace Big_File_Manipulator.Pages
                             });
                         }));
                     }
-
                 }
             });
         }
 
         private void CopyBtn_Click(object sender, RoutedEventArgs e)
         {
-            StatusGroup.Visibility = Visibility.Visible;
+            PerformFileOp((f, t) => { File.Copy(f, t); });
         }
 
         private void MoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            StatusGroup.Visibility = Visibility.Collapsed;
+            PerformFileOp((f, t) => { File.Move(f, t); });
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            BulkOperator.MassFileOp(LocationManager.location, false, (f, t) => { File.Delete(f); });
         }
 
         private void GetDirInfo(string loc, bool first = false)
@@ -108,49 +109,16 @@ namespace Big_File_Manipulator.Pages
                 string[] files = Directory.GetFiles(loc);
 
                 if (first)
-                {
-                    _ = Dispatcher.BeginInvoke((Action)(() =>
-                    {
-                        DirWrap.Children.Clear();
-
-                        DNRTxt.Text = $"Directories in Root: {dirs.Length}";
-                        FNRTxt.Text = $"Files in Root: {files.Length}";
-
-                        foreach (string dir in dirs)
-                        {
-                            _ = DirWrap.Children.Add(new Controls.ImageButton(dir.Split('\\')[^1], dir, ref DirWrap, ref InstructionTxt, true).Update());
-                        }
-
-                        foreach (string file in files)
-                        {
-                            _ = DirWrap.Children.Add(new Controls.ImageButton(file.Split('\\')[^1], file, ref DirWrap, ref InstructionTxt).Update());
-                        }
-
-                        InstructionTxt.Text = LocationManager.location;
-                    }));
-                }
+                    PopulateExplorer(dirs, files);
 
                 fileCount += files.Length;
                 dirCount += dirs.Length;
 
                 foreach (string dir in dirs)
-                {
                     GetDirInfo(dir);
-                }
 
-                foreach (string file in files)
-                {
-                    if (!extensions.Contains(file.Split('.')[^1]))
-                    {
-                        extensions.Add(file.Split('.')[^1]);
-                    }
-                }
-
-                _ = Dispatcher.BeginInvoke((Action)(() =>
-                {
-                    TDTxt.Text = $"Total Directories: {dirCount}";
-                    TFTxt.Text = $"Total Files: {fileCount}";
-                }));
+                PopulateExt(files);
+                SetTotals();
             }
             catch { }
         }
@@ -201,6 +169,63 @@ namespace Big_File_Manipulator.Pages
                 }
 
                 InstructionTxt.Text = LocationManager.location;
+            }
+        }
+
+        private void PopulateExt(string[] files)
+        {
+            foreach (string file in files)
+            {
+                if (file.Split('.').Length > 1 && !extensions.Contains(file.Split('.')[^1]))
+                {
+                    extensions.Add(file.Split('.')[^1]);
+                }
+            }
+        }
+
+        private void SetTotals()
+        {
+            _ = Dispatcher.BeginInvoke((Action)(() =>
+            {
+                TDTxt.Text = $"Total Directories: {dirCount}";
+                TFTxt.Text = $"Total Files: {fileCount}";
+            }));
+        }
+
+        private void PopulateExplorer(string[] dirs, string[] files)
+        {
+            _ = Dispatcher.BeginInvoke((Action)(() =>
+            {
+                DirWrap.Children.Clear();
+
+                DNRTxt.Text = $"Directories in Root: {dirs.Length}";
+                FNRTxt.Text = $"Files in Root: {files.Length}";
+
+                foreach (string dir in dirs)
+                    _ = DirWrap.Children.Add(new Controls.ImageButton(dir.Split('\\')[^1], dir, ref DirWrap, ref InstructionTxt, true).Update());
+
+                foreach (string file in files)
+                    _ = DirWrap.Children.Add(new Controls.ImageButton(file.Split('\\')[^1], file, ref DirWrap, ref InstructionTxt).Update());
+
+                InstructionTxt.Text = LocationManager.location;
+            }));
+        }
+
+        private void PerformFileOp(Action<string, string> action)
+        {
+            if ((bool)new Dialogs.SelectDir().ShowDialog())
+            {
+                StatusGroup.Visibility = Visibility.Visible;
+                MessageBoxResult res = MessageBox.Show("Would you like to preserve the directory structure?", "[QUESTION] - Preserve", MessageBoxButton.YesNoCancel);
+
+                if (res != MessageBoxResult.Cancel)
+                {
+                    BulkOperator.MassFileOp(LocationManager.location, res == MessageBoxResult.Yes, action);
+                }
+                else
+                {
+                    StatusGroup.Visibility = Visibility.Collapsed;
+                }
             }
         }
     }

@@ -8,6 +8,7 @@ namespace Big_File_Manipulator
 {
     class LocationManager
     {
+        public static string selectedDir = "";
         public static string location = "";
     }
 }

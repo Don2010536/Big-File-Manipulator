@@ -5,23 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Big_File_Manipulator.Dialogs"
         mc:Ignorable="d"
-        Title="SelectDir" Height="450" Width="800" Background="{x:Null}" Foreground="White" AllowsTransparency="True" WindowStyle="None">
+        Title="SelectDir" Background="{x:Null}" Foreground="White" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="49*"/>
-			<RowDefinition Height="401*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
-		<Grid Margin="10,10,10,9" Grid.ColumnSpan="2">
+
+		<Border Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#FF1E1E1E" BorderBrush="White" CornerRadius="12,12,12,12" BorderThickness="1,1,1,1" Margin="10,10,10,10" MinHeight="120" MinWidth="800">
+			<Border.Effect>
+				<DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FF59A8DE"/>
+			</Border.Effect>
+		</Border>
+		<Grid Margin="10,10,10,10" Grid.ColumnSpan="2">
 			<TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" Text="Directory: " TextWrapping="Wrap" VerticalAlignment="Center" FontSize="16" Height="21" Width="72"/>
-			<TextBox x:Name="InitDir" Style="{StaticResource TextBox}" Margin="87,0,45,0" Text="" TextWrapping="NoWrap" VerticalAlignment="Center" Height="30" BorderBrush="White" Background="#FF333337" Foreground="White" IsReadOnly="True" IsUndoEnabled="False"/>
-			<Button x:Name="SelectFolderBtn" Style="{StaticResource Button}" Content="…" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Height="30" Width="30" Background="#FF3C75C3" Foreground="White" BorderBrush="{x:Null}"/>
+			<TextBox x:Name="InitDir" Style="{StaticResource TextBox}" Margin="87,10,45,10" Text="" TextWrapping="NoWrap" VerticalAlignment="Center" Height="30" BorderBrush="White" Background="#FF333337" Foreground="White" IsReadOnly="True" IsUndoEnabled="False" KeyDown="InitDir_KeyDown"/>
+			<Button x:Name="SelectFolderBtn" Style="{StaticResource Button}" Content="…" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Height="30" Width="30" Background="#FF3C75C3" Foreground="White" BorderBrush="{x:Null}" Click="SelectFolderBtn_Click"/>
 		</Grid>
-		<Button Content="Button" Margin="10,10,10,0" VerticalAlignment="Top" Width="380" Height="30" Grid.Row="1"/>
-		<Button Content="Button" Margin="10,10,10,0" VerticalAlignment="Top" Width="380" Height="30" Grid.Row="1" Grid.Column="1"/>
+		<Button x:Name="CancelBtn" Style="{StaticResource Button}" Content="Cancel" Margin="20,10,10,10" VerticalAlignment="Top" Height="30" Grid.Row="1" Background="#FFB7C33C" Click="CancelBtn_Click"/>
+		<Button x:Name="SubmitBtn" Style="{StaticResource Button}" Content="Submit" Margin="10,10,20,0" Grid.Row="1" Grid.Column="1" Background="#FF3CC367" Height="30" VerticalAlignment="Top" Click="SubmitBtn_Click"/>
 
 	</Grid>
 </Window>
