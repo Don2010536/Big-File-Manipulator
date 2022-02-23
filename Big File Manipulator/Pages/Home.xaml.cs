@@ -14,11 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows.Threading;
 
 namespace Big_File_Manipulator.Pages
 {
     // To do
-    // Add the support for the status bar and tracking
     // Add logging for errors
     // Add an about section
     // Add an icon
@@ -32,9 +32,15 @@ namespace Big_File_Manipulator.Pages
     /// </summary>
     public partial class Home : Page
     {
-        List<string> extensions = new();
-        int fileCount = 0;
-        int dirCount = 0;
+        private readonly DispatcherTimer timer = new();
+        private readonly List<string> extensions = new();
+
+        private string opS;
+        private string opP;
+
+        private int completed = 0;
+        private int fileCount = 0;
+        private int dirCount = 0;
 
         public Home()
         {
@@ -98,17 +104,32 @@ namespace Big_File_Manipulator.Pages
 
         private void CopyBtn_Click(object sender, RoutedEventArgs e)
         {
+            opS = "copy";
+            opP = "copied";
+
+            timer.Start();
+
             PerformFileOp((f, t) => { File.Copy(f, t); });
         }
 
         private void MoveBtn_Click(object sender, RoutedEventArgs e)
         {
+            opS = "move";
+            opP = "moved";
+
+            timer.Start();
+
             PerformFileOp((f, t) => { File.Move(f, t); });
         }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            BulkOperator.MassFileOp(LocationManager.location, false, (f, t) => { File.Delete(f); });
+            opS = "delete";
+            opP = "deleted";
+            
+            timer.Start();
+
+            new BulkOperator().MassFileOp(LocationManager.location, false, (f, t) => { File.Delete(f); });
         }
 
         private void GetDirInfo(string loc, bool first = false)
@@ -230,13 +251,42 @@ namespace Big_File_Manipulator.Pages
 
                 if (res != MessageBoxResult.Cancel)
                 {
-                    BulkOperator.MassFileOp(LocationManager.location, res == MessageBoxResult.Yes, action);
+                    new BulkOperator().MassFileOp(LocationManager.location, res == MessageBoxResult.Yes, action);
                 }
                 else
                 {
                     StatusGroup.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            timer.Interval = TimeSpan.FromMilliseconds(250);
+            timer.Tick += Timer_Tick;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            StatusFilesXd.Text = $"Files {opP}: {completed}";
+            StatusToX.Text = $"Files to {opS}: {fileCount}";
+
+            try
+            {
+                completed = Convert.ToInt32(File.ReadAllLines($"{Environment.CurrentDirectory}\\Logging\\Progress.txt")[0]);
+                OpProgress.Value = completed;
+
+                if (OpProgress.Value == OpProgress.Maximum)
+                {
+                    StatusGroup.Visibility = Visibility.Collapsed;
+                    timer.Stop();
+                }
+            } catch { }
         }
     }
 }

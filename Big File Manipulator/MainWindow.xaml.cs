@@ -34,7 +34,7 @@ namespace Big_File_Manipulator
 
         private void SettingsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentFrame.Content = null;
         }
 
         private void AboutBtn_Click(object sender, RoutedEventArgs e)
