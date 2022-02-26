@@ -22,7 +22,6 @@ namespace Big_File_Manipulator.Pages
     // Add logging for errors
     // Add an about section
     // Add an icon
-    // Create a proper window title
     // Modify UI to more clearly convey filetypes at a glance in dirwrap
     // Break up the selectfolder btn click event
     // COMMENT THE CODE

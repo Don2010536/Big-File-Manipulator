@@ -5,19 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Big_File_Manipulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FF2D2D30" Foreground="White"  MinWidth="850" MinHeight="800">
+        Title="MainWindow" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#FF2D2D30" Foreground="White"  MinWidth="900" MinHeight="800" MouseLeftButtonDown="Window_MouseLeftButtonDown" StateChanged="Window_StateChanged">
+	
+	<WindowChrome.WindowChrome>
+		<WindowChrome GlassFrameThickness="0,0,0,1" CaptionHeight="0" />
+	</WindowChrome.WindowChrome>
+
 	<Grid>
 		<Rectangle Margin="0,50,0,0" Fill="#FF1E1E1E"/>
-		<DockPanel LastChildFill="False" Grid.Row="1">
-			<StackPanel DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Orientation="Horizontal">
+		<DockPanel LastChildFill="False" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+			<StackPanel Height="50" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
 				<!-- Logo -->
-				<TextBlock Text="File Manipulator" TextWrapping="Wrap" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,20,0"/>
+				<TextBlock IsHitTestVisible="False" Text="File Manipulator" TextWrapping="Wrap" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,20,0"/>
 
 				<!-- Navigation Controls -->
 				<Button x:Name="HomeBtn" Content="Home" VerticalAlignment="Center" FontSize="16" Margin="5,0,5,0" Background="{x:Null}" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,1" Click="HomeBtn_Click"/>
 				<Button x:Name="SettingsBtn" Content="Settings" FontSize="16" Background="{x:Null}" Foreground="#FFB0B0B8" BorderBrush="#FF2D2D30" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0" Click="SettingsBtn_Click"/>
 				<Button x:Name="AboutBtn" Content="About" FontSize="16" Background="{x:Null}" Foreground="#FFB0B0B8" BorderBrush="#FF2D2D30" BorderThickness="0,0,0,1" VerticalAlignment="Center" Margin="5,0,5,0" Click="AboutBtn_Click"/>
 			</StackPanel>
+			<Grid DockPanel.Dock="Right" HorizontalAlignment="Right">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,5,10,5">
+					<Button x:Name="MinimizeBtn" Style="{StaticResource Button}" Width="40" Height="40" Margin="10,0,10,0" Background="#FF3CC355" Content="🗕" Click="MinimizeBtn_Click"/>
+					<Button x:Name="MaximizeBtn" Style="{StaticResource Button}" Width="40" Height="40" Margin="10,0,10,0" Background="#FFD5E62B" Content="🗖" Click="MaximizeBtn_Click"/>
+					<Button x:Name="CloseBtn" Style="{StaticResource Button}" Width="40" Height="40" Margin="10,0,0,0" Background="#FFC33C3C" Content="🗙" Click="CloseBtn_Click"/>
+				</StackPanel>
+			</Grid>
 		</DockPanel>
 
 		<Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" Margin="0,50,0,0"/>

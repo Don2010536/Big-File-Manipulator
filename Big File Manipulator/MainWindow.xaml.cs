@@ -41,5 +41,45 @@ namespace Big_File_Manipulator
         {
 
         }
+
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MaximizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MaximizeBtn.Content.ToString() == "🗗")
+            {
+                MaximizeBtn.Content = "🗖";
+                WindowState = WindowState.Normal;
+                BorderThickness = new Thickness(0);
+            } else
+            {
+                MaximizeBtn.Content = "🗗";
+                WindowState = WindowState.Maximized;
+                BorderThickness = new Thickness(8);
+            }
+        }
+
+        private void MinimizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                MaximizeBtn.Content = "🗗";
+                BorderThickness = new Thickness(8,8,8,8
+                    );
+            }
+        }
     }
 }
