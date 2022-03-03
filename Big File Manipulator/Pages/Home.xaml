@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Big_File_Manipulator.Pages"
       mc:Ignorable="d" MinWidth="900" MinHeight="600"
-      Title="Home" Foreground="White" Loaded="Page_Loaded" Unloaded="Page_Unloaded" Height="443" Width="631">
+      Title="Home" Foreground="White" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
 	<Grid>
 		<Grid.RowDefinitions>

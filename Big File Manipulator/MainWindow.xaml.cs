@@ -20,6 +20,11 @@ namespace Big_File_Manipulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        double w;
+        double h;
+        double x;
+        double y;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,12 +58,26 @@ namespace Big_File_Manipulator
             {
                 MaximizeBtn.Content = "🗖";
                 WindowState = WindowState.Normal;
+
+                Application.Current.MainWindow.Width = w;
+                Application.Current.MainWindow.Height = h;
+                Left = x;
+                Top = y;
+
                 BorderThickness = new Thickness(0);
             } else
             {
+                w = Width;
+                h = Height;
+                x = Left;
+                y = Top;
+
                 MaximizeBtn.Content = "🗗";
                 WindowState = WindowState.Maximized;
-                BorderThickness = new Thickness(8);
+                Width = SystemParameters.WorkArea.Width;
+                Height = SystemParameters.WorkArea.Height;
+                
+                BorderThickness = new Thickness(7,7,7,45);
             }
         }
 
@@ -77,8 +96,7 @@ namespace Big_File_Manipulator
             if (WindowState == WindowState.Maximized)
             {
                 MaximizeBtn.Content = "🗗";
-                BorderThickness = new Thickness(8,8,8,8
-                    );
+                BorderThickness = new Thickness(7,7,7,45);
             }
         }
     }

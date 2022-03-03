@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Big_File_Manipulator</RootNamespace>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\FileManip.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
